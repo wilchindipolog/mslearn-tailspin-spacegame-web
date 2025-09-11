@@ -67,15 +67,13 @@ steps:
     majorVersion: '1'
     minorVersion: '0'
     patchVersion: '0'
-    outputDir: '$(Build.ArtifactStagingDirectory)'
 
 # This NuGetCommand@2 task pushes the package to your Tailspin.SpaceGame.Web.Models Azure Artifacts feed:
 - task: NuGetCommand@2
   displayName: 'Publish NuGet package'
   inputs:
     command: push
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-    feedPublish: '$(System.TeamProject)/Tailspin.SpaceGame.Web.Models'
+    feedPublish: '$(System.TeamProject)/Tailspin.SpaceGame.Web.Models01'
     allowPackageConflicts: true
   condition: succeeded()
 
