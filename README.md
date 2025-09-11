@@ -1,4 +1,4 @@
-
+[![Build Status](https://dev.azure.com/wilchindipolog-upskilling/Space%20Game%20-%20web%20-%20Workflow/_apis/build/status%2Fwilchindipolog.mslearn-tailspin-spacegame-web?branchName=main)](https://dev.azure.com/wilchindipolog-upskilling/Space%20Game%20-%20web%20-%20Workflow/_build/latest?definitionId=12&branchName=main)
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
@@ -63,3 +63,4 @@ Privacy information can be found at https://privacy.microsoft.com/en-us/
 
 Microsoft and any contributors reserve all other rights, whether under their respective copyrights, patents,
 or trademarks, whether by implication, estoppel or otherwise.
+
