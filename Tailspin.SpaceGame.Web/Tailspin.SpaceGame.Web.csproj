@@ -8,4 +8,12 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\avatars\" />
   </ItemGroup>
+
+  <?xml version="1.0" encoding="utf-8"?>
+  <configuration>
+    <packageSources>
+      <clear />
+      <add key="Tailspin.SpaceGame.Web.Models01" value="https://pkgs.dev.azure.com/wilchindipolog-upskilling/f44d10ff-615b-456f-b6d5-df373accfd0b/_packaging/Tailspin.SpaceGame.Web.Models01/nuget/v3/index.json" />
+    </packageSources>
+  </configuration>
 </Project>
