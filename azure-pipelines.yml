@@ -49,13 +49,42 @@ steps:
     command: 'restore'
     projects: '**/*.csproj'
 
-- template: templates/build.yml
-  parameters:
-    buildConfiguration: 'Debug'
+- task: DotNetCoreCLI@2
+  displayName: 'Build the project - ${{ parameters.buildConfiguration }}'
+  inputs:
+    command: 'build'
+    arguments: '--no-restore --configuration ${{ parameters.buildConfiguration }}'
+    projects: '**/*.csproj'
 
-- template: templates/build.yml
-  parameters:
-    buildConfiguration: 'Release'
+# This DotNetCoreCLI@2 task packages the project with a version of 1.0.0:
+- task: DotNetCoreCLI@2
+  displayName: 'Pack the project - $(buildConfiguration)'
+  inputs:
+    command: 'pack'
+    projects: '**/*.csproj'
+    arguments: '--no-build --configuration $(buildConfiguration)'
+    versioningScheme: byPrereleaseNumber
+    majorVersion: '1'
+    minorVersion: '0'
+    patchVersion: '0'
+
+# This NuGetCommand@2 task pushes the package to your Tailspin.SpaceGame.Web.Models Azure Artifacts feed:
+- task: NuGetCommand@2
+  displayName: 'Publish NuGet package'
+  inputs:
+    command: push
+    feedPublish: '$(System.TeamProject)/Tailspin.SpaceGame.Web.Models'
+    allowPackageConflicts: true
+  condition: succeeded()
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publish the project - ${{ parameters.buildConfiguration }}'
+  inputs:
+    command: 'publish'
+    projects: '**/*.csproj'
+    publishWebProjects: false
+    arguments: '--no-build --configuration ${{ parameters.buildConfiguration }} --output $(Build.ArtifactStagingDirectory)/${{ parameters.buildConfiguration }}'
+    zipAfterPublish: true
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
